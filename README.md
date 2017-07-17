@@ -62,6 +62,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 ```
 
 ## Setting up the application
+`IMPORTANT... THIS IS THE ARMHF VERSION`
 
 Webui can be found at `http://<your-ip>:8083`
 
@@ -94,7 +95,7 @@ To reverse proxy with our Letsencrypt docker container use the following locatio
 
 * image version number
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' calibre-web`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' lsioarmhf/calibre-web`
 
 ## Versions
 
