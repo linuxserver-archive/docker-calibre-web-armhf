@@ -6,10 +6,7 @@ ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 
-# package versions
-ARG IMAGEMAGICK_VER="6.9.9-0"
-
-# install build packages
+# install build packages
 RUN \
  apk add --no-cache --virtual=build-dependencies \
 	file \
@@ -45,12 +42,15 @@ RUN \
 	tiff \
 	zlib && \
 
-# compile imagemagic
+# compile imagemagic
+ IMAGEMAGICK_VER=$(curl --silent http://www.imagemagick.org/download/digest.rdf \
+	| grep ImageMagick-6.*tar.xz | sed 's/\(.*\).tar.*/\1/' \
+	| sed 's/^.*ImageMagick-/ImageMagick-/') && \
  mkdir -p \
 	/tmp/imagemagick && \
  curl -o \
  /tmp/imagemagick-src.tar.xz -L \
-	"http://www.imagemagick.org/download/releases/ImageMagick-${IMAGEMAGICK_VER}.tar.xz" && \
+	"http://www.imagemagick.org/download/${IMAGEMAGICK_VER}.tar.xz" && \
  tar xf \
  /tmp/imagemagick-src.tar.xz -C \
 	/tmp/imagemagick --strip-components=1 && \
@@ -76,7 +76,7 @@ RUN \
  find / -name '.packlist' -o -name 'perllocal.pod' \
 	-o -name '*.bs' -delete && \
 
-# install calibre-web
+# install calibre-web
  mkdir -p \
 	/app/calibre-web && \
  curl -o \
@@ -91,15 +91,15 @@ RUN \
  pip install --no-cache-dir -U -r \
 	optional-requirements.txt && \
 
-# cleanup
+# cleanup
  apk del --purge \
 	build-dependencies && \
  rm -rf \
 	/tmp/*
 
-# add local files
+# add local files
 COPY root/ /
 
-# ports and volumes
+# ports and volumes
 EXPOSE 8083
 VOLUME /books /config
