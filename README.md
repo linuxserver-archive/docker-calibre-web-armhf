@@ -99,4 +99,5 @@ To reverse proxy with our Letsencrypt docker container use the following locatio
 
 ## Versions
 
++ **24.07.17:** Curl version for imagemagick.
 + **17.07.17:** Initial release
