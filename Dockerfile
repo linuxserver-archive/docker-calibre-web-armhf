@@ -1,13 +1,10 @@
-FROM lsiobase/alpine.python.armhf:3.7
+FROM lsiobase/alpine.python.armhf:3.8
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="chbmb"
-
-# work around for hanging configure
-ARG CONFIG_SHELL=/bin/sh
 
 RUN \
  echo "**** install build packages ****" && \
@@ -98,9 +95,9 @@ RUN \
  rm -rf \
 	/tmp/*
 
-# add local files
+# add local files
 COPY root/ /
 
-# ports and volumes
+# ports and volumes
 EXPOSE 8083
 VOLUME /books /config
