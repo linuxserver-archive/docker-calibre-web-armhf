@@ -1,0 +1,20 @@
+#!/usr/bin/with-contenv bash
+
+echo '
+******************************************************
+******************************************************
+*                                                    *
+*                                                    *
+*          This image has been deprecated            *
+*                                                    *
+*           Use the multi-arch images at             *
+*                                                    *
+*               linuxserver/calibre-web              *
+*                                                    *
+*    https://hub.docker.com/r/linuxserver/calibre-web*
+*                                                    *
+*   https://github.com/linuxserver/docker-calibre-web*
+*                                                    *
+*                                                    *
+*                                                    *
+******************************************************'
